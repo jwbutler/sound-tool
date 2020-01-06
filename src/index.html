@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Sound Tool</title>
-  <script type="text/javascript" src="./audio.js"></script>
-  <script type="text/javascript" src="./soundtool.js"></script>
+  <script type="text/javascript" src="./SoundPlayer.js"></script>
+  <script type="text/javascript" src="./SoundTable.js"></script>
+  <script type="text/javascript" src="./SoundTool.js"></script>
   <style type="text/css">
     * {
       box-sizing: border-box !important;
@@ -29,15 +30,14 @@
       height: 100%;
       display: block;
     }
-    
   </style>  
 </head>
-<body onload="jwb.soundtool.init()">
+<body onload="window.jwb = window.jwb || {}; window.jwb.soundtool = new SoundTool();">
   <button onclick="jwb.soundtool.play()">Play</button>
   <button onclick="jwb.soundtool.stop()">Stop</button>
   <button onclick="jwb.soundtool.clear(); jwb.audio.stop();">Reset</button>
   <button onclick="jwb.soundtool.importData(prompt('Please enter data from Excel:'))">Import</button>
-  <table id="soundtable">
+  <table>
     <thead>
       <tr>
         <th>Frequency (Hz)</th>
@@ -48,6 +48,6 @@
     <tbody>
     </tbody>
   </table>
-  <button onclick="jwb.soundtool.addRow(null, null)">Add row</button>
+  <button onclick="jwb.soundtool.tables[0].addRow(null, null)">Add row</button>
 </body>
 </html>
