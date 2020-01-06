@@ -36,18 +36,9 @@
   <button onclick="jwb.soundtool.play()">Play</button>
   <button onclick="jwb.soundtool.stop()">Stop</button>
   <button onclick="jwb.soundtool.clear(); jwb.audio.stop();">Reset</button>
-  <button onclick="jwb.soundtool.importData(prompt('Please enter data from Excel:'))">Import</button>
-  <table>
-    <thead>
-      <tr>
-        <th>Frequency (Hz)</th>
-        <th>Duration (ms)</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-  <button onclick="jwb.soundtool.tables[0].addRow(null, null)">Add row</button>
+  <input type="checkbox" />Repeat
+  <!-- <button onclick="jwb.soundtool.importData(prompt('Please enter data from Excel:'))">Import</button> -->
+  <div class="tableContainer"></div>
+  <button onclick="jwb.soundtool.addTable()">Add table</button>
 </body>
 </html>
