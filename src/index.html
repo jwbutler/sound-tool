@@ -36,7 +36,7 @@
   <button onclick="jwb.soundtool.play()">Play</button>
   <button onclick="jwb.soundtool.stop()">Stop</button>
   <button onclick="jwb.soundtool.clear(); jwb.audio.stop();">Reset</button>
-  <input type="checkbox" />Repeat
+  <input type="checkbox" onchange="jwb.soundtool.updateDocumentLocation()" />Repeat
   <!-- <button onclick="jwb.soundtool.importData(prompt('Please enter data from Excel:'))">Import</button> -->
   <div class="tableContainer"></div>
   <button onclick="jwb.soundtool.addTable()">Add table</button>

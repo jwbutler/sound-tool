@@ -14,18 +14,22 @@ class SoundTool {
         // multiple tables
         if (data && data[0] && data[0][0] && data[0][0][0]) {
           for (let i = 0; i < data.length; i++) {
-            this.tables.push(new SoundTable(data[i], data[i].length, () => this._updateDocumentLocation(), () => this.render()));
+            this.tables.push(new SoundTable(data[i], data[i].length, () => this.updateDocumentLocation(), () => this.render()));
           }
         } else {
-          this.tables.push(new SoundTable(data, data.length, () => this._updateDocumentLocation(), () => this.render()));
+          this.tables.push(new SoundTable(data, data.length, () => this.updateDocumentLocation(), () => this.render()));
         }
       }
+
+      if (query.match(/repeat=true/)) {
+        document.querySelector('input[type=checkbox]').checked = true;
+      }
     } else {
-      this.tables.push(new SoundTable([], 5, () => this._updateDocumentLocation(), () => this.render()));
+      this.tables.push(new SoundTable([], 5, () => this.updateDocumentLocation(), () => this.render()));
     }
 
     this.render();
-    this._updateDocumentLocation();
+    this.updateDocumentLocation();
   }
 
   play() {
@@ -43,17 +47,17 @@ class SoundTool {
   }
 
   addTable() {
-    this.tables.push(new SoundTable([], 5, () => this._updateDocumentLocation(), () => this.render()));
+    this.tables.push(new SoundTable([], 5, () => this.updateDocumentLocation(), () => this.render()));
     this.render();
   }
 
   clear() {
-    this.tables = [new SoundTable([], 5, () => this._updateDocumentLocation(), () => this.render())];
+    this.tables = [new SoundTable([], 5, () => this.updateDocumentLocation(), () => this.render())];
     this.render();
-    this._updateDocumentLocation();
+    this.updateDocumentLocation();
   }
 
-  _updateDocumentLocation() {
+  updateDocumentLocation() {
     let data;
     if (this.tables.length > 1) {
       data = this.tables.map(table => table.data);
@@ -66,6 +70,9 @@ class SoundTool {
 
     if (data.length) {
       queryParts['freqs'] = JSON.stringify(data);
+    }
+    if (document.querySelector('input[type=checkbox]').checked) {
+      queryParts['repeat'] = 'true';
     }
     if (Object.entries(queryParts).length > 0) {
       const query = Object.entries(queryParts).map(([k, v]) => `${k}=${v}`).reduce((a, b) => `${a}&${b}`);

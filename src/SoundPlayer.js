@@ -56,7 +56,6 @@ class SoundPlayer {
       const runtime = freqsAndLengths.map(([freq, ms]) => ms).reduce((a, b) => a + b);
       this.oscillator.start();
       this.oscillator.started = true;
-      this.oscillator.stop(startTime + runtime / 1000);
 
       const repeat = document.querySelector('input[type=checkbox]').checked;
       if (repeat) {
@@ -64,6 +63,7 @@ class SoundPlayer {
         o.isRepeating = true;
         setTimeout(() => o.isRepeating && !o.stopped && this.playMulti(freqsAndLengths), runtime);
       }
+      this.oscillator.stop(startTime + runtime / 1000);
     }
   }
 }
